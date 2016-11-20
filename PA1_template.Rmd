@@ -36,7 +36,7 @@ stepsperday=cdata %>% group_by(date) %>% summarise(totalsteps=sum(steps))
 
 Next, I plot a histogram of total number of steps taken a day.
 
-```{R}
+```{R Histogram of Total Number of Steps a Day}
 hist(stepsperday$totalsteps, main='Histogram of Total Number of Steps a Day', xlab='Number of Steps', breaks=20, ylim=c(0,20))
 ```
 
@@ -50,7 +50,7 @@ median(stepsperday$totalsteps)
 ## What is the average daily activity pattern?
 I calculate the mean number of steps, this time grouping by interval. I then plot the results taking care to specify the interval on the x-axis.
 
-```{R}
+```{R Time Series Plot of Average Steps by Interval}
 stepsbyinterval=cdata %>% group_by(interval) %>% summarise(meansteps=mean(steps))
 plot(stepsbyinterval$interval, stepsbyinterval$meansteps, type='l', 
      main='Time Series Plot of Average Steps by Interval', xlab='Interval', ylab='Number of Steps')
@@ -82,7 +82,7 @@ idata=rbind(cdata,icdata)
 
 Next, I do a similar histogram by repeating the steps before on the new complete dataset with imputed and original data.
 
-```{R}
+```{R Histogram of Total Number of Steps a Day (with Imputed Data)}
 istepsperday=idata %>% group_by(date) %>% summarise(totalsteps=sum(steps))
 hist(istepsperday$totalsteps, main='Histogram of Total Number of Steps a Day \n (with Imputation)', xlab='Number of Steps', breaks=20, ylim=c(0,20))
 ```
@@ -107,7 +107,7 @@ idata$dayofweek=NULL
 
 Then I repeat the earlier analysis with the enhanced dataset. This time, I split the dataset into weekdays and weekend in the time series plot.
 
-```{R}
+```{R Average Number of Steps in each interval for Weekdays and Weekends}
 stepsbyinterval_dow=idata %>% group_by(interval, daytype) %>% summarise(meansteps=mean(steps))
 qplot(interval,meansteps,data=stepsbyinterval_dow, facets= daytype ~ ., geom='line'
       ,ylab='Number of Steps', xlab='Interval', main='Average Number of Steps in each interval \nfor Weekdays and Weekends')

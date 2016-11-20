@@ -39,7 +39,7 @@ Next, I plot a histogram of total number of steps taken a day.
 hist(stepsperday$totalsteps, main='Histogram of Total Number of Steps a Day', xlab='Number of Steps', breaks=20, ylim=c(0,20))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/Histogram of Total Number of Steps a Day-1.png)<!-- -->
 
 Finally, I calculate the mean and median number of steps taken a day.
 
@@ -70,7 +70,7 @@ plot(stepsbyinterval$interval, stepsbyinterval$meansteps, type='l',
      main='Time Series Plot of Average Steps by Interval', xlab='Interval', ylab='Number of Steps')
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/Time Series Plot of Average Steps by Interval-1.png)<!-- -->
 <br>
 To find out which interval has the highest average number of steps I use the which.max command.
 
@@ -119,7 +119,7 @@ istepsperday=idata %>% group_by(date) %>% summarise(totalsteps=sum(steps))
 hist(istepsperday$totalsteps, main='Histogram of Total Number of Steps a Day \n (with Imputation)', xlab='Number of Steps', breaks=20, ylim=c(0,20))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](PA1_template_files/figure-html/Histogram of Total Number of Steps a Day (with Imputed Data)-1.png)<!-- -->
 
 Notably, the only change in the histogram vis-a-vis before is an increase in the 10000-11000 bucket. This makes sense as all the missing values occured on days in which all the 'steps' readings were missing. These days all received the same number of steps as replacement and as such would appear in the histogram all in the same bucket. This can be confirmed with `subset(data, is.na(steps)) %>% group_by(date) %>% summarise(length(interval))`.
 
@@ -161,4 +161,4 @@ qplot(interval,meansteps,data=stepsbyinterval_dow, facets= daytype ~ ., geom='li
       ,ylab='Number of Steps', xlab='Interval', main='Average Number of Steps in each interval \nfor Weekdays and Weekends')
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](PA1_template_files/figure-html/Average Number of Steps in each interval for Weekdays and Weekends-1.png)<!-- -->
